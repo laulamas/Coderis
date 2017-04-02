@@ -1,0 +1,102 @@
+<?php
+session_start();
+header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+	header('Cache-Control: no-store, no-cache, must-revalidate');
+	header('Cache-Control: post-check=0, pre-check=0', FALSE);
+	header('Pragma: no-cache');	
+if($_SESSION['logged']!=1){
+header ('Location: index.html');
+}
+
+
+?>
+<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6 lt8"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7 lt8"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8 lt8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="UTF-8" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">  -->
+        <title>Acceso y Registro</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <meta name="description" content="Login and Registration Form with HTML5 and CSS3" />
+        <meta name="keywords" content="html5, css3, form, switch, animation, :target, pseudo-class" />
+        <meta name="author" content="Codrops" />
+        <link rel="shortcut icon" href="../favicon.ico"> 
+        <link rel="stylesheet" type="text/css" href="css/demo.css" />
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="css/animate-custom.css" />
+		
+    </head>
+    <body>
+        <div class="container">
+            
+            <header>
+                <h1>Coderis | <span>Registro de Documentos</span></h1>
+		 </header>
+				<div >
+                       <form action="savedata.php" method= "post" >
+					        
+                                <h1> Regístrate </h1> <br>
+                                <p> 
+                                    <label for="usernamesignup"> Nombre</label>
+                                    <input id="nombre" name="nombre" required="required" type="text" placeholder="name" />
+                                </p> <br>
+								<p> 
+                                    <label for="usernamesignup"> Apellido</label>
+                                    <input id="apellido" name="apellido" required="required" type="text" placeholder="lastname" />
+                                </p> <br>
+								<p> 
+                                    <label for="usernamesignup"> Teléfono</label>
+                                    <input id="telefono" name="telefono" required="required" type="text" placeholder="number" />
+                                </p> <br>
+								<p> 
+                                    <label for="usernamesignup"> Usuario</label>
+                                    <input id="username" name="username" required="required" type="text" placeholder="username" />
+                                </p> <br>
+								
+								<p>
+									<label for="emailsignup"> Correo</label>
+									<input id="emailsignup" name="emailsignup" required="required" type="email" placeholder="email@email.com"/>
+								</p><br>
+								
+								<p> 
+                                    <label for="passwordsignup">Clave </label>
+                                    <input id="passwordsignup" name="passwordsignup" required="required" type="password" placeholder="eg. X8df!90EO"/>
+                                </p><br> 
+                                	if($user_type == 1)
+									{?>
+									<input type="checkbox" name="nuevo" />Ingresar nuevo empleado</input>
+								   <? } 
+								<input type="submit" value="Guardar" /> <br>
+				    </form>
+					
+					<form>
+					<select name="sel_usuario">
+						<option value="0">Seleccione Empleado</option>
+					<?
+					$sql = "Select * from Registro where tipo_usuario <> 1 order by apellido, nombre asc";
+					$result = mysqli_query($conn,$sql);
+
+
+					while($row=mysqli_fetch_array($result)){
+					$id = $row["id_usuario"];
+					$nombre = $row["nombre"];
+					$apellido = $row["apellido"];
+
+	echo "<option value='$id'>".$apellido.", ".$nombre."</option>";	
+}
+
+?>
+
+</select>
+
+</form> 
+					
+			</div>			
+		</div>
+    </body>
+</html>
